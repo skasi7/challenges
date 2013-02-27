@@ -6,6 +6,7 @@ __pychecker__ = 'no-callinit no-classattr'
 
 # External imports
 import string
+import re
 import sys
 
 # Internal imports (if any)
@@ -14,7 +15,8 @@ def getline():
   return sys.stdin.next().rstrip()
 
 def challenge():
-  print getline()
+  pat = re.compile(getline().replace('(', '[').replace(')', ']'))
+  print len(filter(lambda x: pat.match(x), words))
 
 # Main entry point
 if __name__ == '__main__':
